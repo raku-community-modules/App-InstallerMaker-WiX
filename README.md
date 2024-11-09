@@ -1,6 +1,6 @@
-# Perl 6 WiX Installer Maker
+# Raku WiX Installer Maker
 
-Written an application in Perl 6? Want to give Windows users an MSI so they can
+Written an application in Raku? Want to give Windows users an MSI so they can
 easily install it? That's what this little program is here to help with.
 
 Fair warning: it does something close to the Simplest Thing That Could Possibly
@@ -16,7 +16,7 @@ free to PR them.
 
 This tool:
 
-* Builds a private MoarVM, NQP, and Rakudo Perl 6 of the requested version
+* Builds a private MoarVM, NQP, and Rakudo Raku of the requested version
 * Installs a zef (module installer) for use with this
 * Uses that to install your application alongside the privately built Rakudo,
   either from the module ecosystem or from on disk, together with all of its
@@ -37,9 +37,9 @@ This tool:
 
 ## What you'll need
 
-* Perl 6, to run this tool
+* Raku, to run this tool
 * Git
-* Perl 5, to run the MoarVM/NQP/Rakudo configure programs (tested with
+* Perl, to run the MoarVM/NQP/Rakudo configure programs (tested with
   ActiveState Perl, though likely shouldn't matter)
 * The Visual C++ build tools, and `nmake`/`cl`/`link` on path. Note that this
   does not imply installing Visual Studio; it is possible to freely download the
@@ -58,16 +58,16 @@ Write a YAML configuration file like this:
     # Rakudo repository for some reason, since these are actually used to do a
     # checkout in the git repositories.
     versions:
-        - moar: 2017.02
-        - nqp: 2017.02
-        - rakudo: 2017.02
+        - moar: 2024.10
+        - nqp: 2024.10
+        - rakudo: 2024.10
 
-    # The installation target location (currently Perl 6 is not relocatable).
+    # The installation target location (currently Raku is not relocatable).
     install-location: C:\MyApplication
 
     # The application to install (will be passed to `zef install`), so you can
     # actually list multiple things here if you wish.) You can also pass a path
-    # if the project is not in the Perl 6 module ecosystem.
+    # if the project is not in the Raku module ecosystem.
     application: App::MyGloriousApplication
 
     # The name of the MSI file to generate. Optional; default is output.msi.
@@ -75,10 +75,10 @@ Write a YAML configuration file like this:
 
     # By default, the PATH will be ammended to include both bin and site bin
     # directories, meaning that every binary will be exposed (including the
-    # bundled MoarVM/Rakudo). This may be useful if you want to make a Perl 6
+    # bundled MoarVM/Rakudo). This may be useful if you want to make a Raku
     # distribution with modules, for example. On the other hand, if you are
     # making an installer for an application that just happens to be written in
-    # Perl 6, it's not so good. If this `expose-entrypoints` section is included,
+    # Raku, it's not so good. If this `expose-entrypoints` section is included,
     # then a folder will be created and added to path, which only contains
     # launch scripts for the apps mentioned below (it should match the name of
     # the application's entrypoint(s)). Note that you can't include names like

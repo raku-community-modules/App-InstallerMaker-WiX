@@ -3,7 +3,7 @@
     "name"          : "App::InstallerMaker::WiX",
     "version"       : "0.2",
     "description"   : "Tool to make basic WiX installers for Perl 6 apps, bundling MoarVM/Rakudo.",
-    "author"        : "Jonathan Worthington <jonathan@edument.se>",
+    "author"        : "Jonathan Worthington",
     "license"       : "Artistic-2.0",
     "depends"       : [
         "Shell::Command",
@@ -12,11 +12,11 @@
     "provides"      : {
         "make-perl6-wix-installer" : "bin/make-perl6-wix-installer",
         "App::InstallerMaker::WiX::Configuration" :
-            "lib/App/InstallerMaker/WiX/Configuration.pm6",
+            "lib/App/InstallerMaker/WiX/Configuration.rakumod",
         "App::InstallerMaker::WiX::InstallerBuilder" :
-            "lib/App/InstallerMaker/WiX/InstallerBuilder.pm6",
+            "lib/App/InstallerMaker/WiX/InstallerBuilder.rakumod",
         "App::InstallerMaker::WiX::PreCheck" :
-            "lib/App/InstallerMaker/WiX/PreCheck.pm6"
+            "lib/App/InstallerMaker/WiX/PreCheck.rakumod"
     },
     "source-url" : "https://github.com/jnthn/p6-app-installermaker-wix.git"
 }
