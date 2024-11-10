@@ -9,9 +9,10 @@
   ],
   "description": "Tool to make basic WiX installers for Raku apps, bundling MoarVM/Rakudo.",
   "license": "Artistic-2.0",
-  "name": "App::InstallerMaker::WiX::PreCheck",
+  "name": "App::InstallerMaker::WiX",
   "perl": "6.*",
   "provides": {
+    "App::InstallerMaker::WiX": "lib/App/InstallerMaker/WiX.rakumod",
     "App::InstallerMaker::WiX::Configuration": "lib/App/InstallerMaker/WiX/Configuration.rakumod",
     "App::InstallerMaker::WiX::InstallerBuilder": "lib/App/InstallerMaker/WiX/InstallerBuilder.rakumod",
     "App::InstallerMaker::WiX::PreCheck": "lib/App/InstallerMaker/WiX/PreCheck.rakumod"
@@ -24,5 +25,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.3"
+  "version": "0.4"
 }

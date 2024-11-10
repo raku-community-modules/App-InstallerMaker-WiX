@@ -2,5 +2,9 @@ Revision history for App::InstallerMaker::WiX
 
 {{$NEXT}}
 
+0.4  2024-11-10T13:50:04+01:00
+    - Move script logic into a module, thus fixing the
+      name with which this distribution should be indexed
+
 0.3  2024-11-10T12:49:29+01:00
     - Initial version as a Raku Community distribution
