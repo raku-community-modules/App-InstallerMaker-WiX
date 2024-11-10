@@ -1,4 +1,6 @@
 Revision history for App::InstallerMaker::WiX
 
 {{$NEXT}}
+
+0.3  2024-11-10T12:49:29+01:00
     - Initial version as a Raku Community distribution

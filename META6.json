@@ -1,4 +1,5 @@
 {
+  "auth": "zef:raku-community-modules",
   "author": "Jonathan Worthington",
   "build-depends": [
   ],
@@ -19,8 +20,9 @@
   ],
   "source-url": "https://github.com/raku-community-modules/App-InstallerMaker-WiX.git",
   "tags": [
+    "WIX"
   ],
   "test-depends": [
   ],
-  "version": "0.2"
+  "version": "0.3"
 }
