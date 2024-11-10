@@ -1,0 +1,10 @@
+use Test;
+use App::InstallerMaker::WiX::Configuration;
+use App::InstallerMaker::WiX::InstallerBuilder;
+use App::InstallerMaker::WiX::PreCheck;
+
+plan 1;
+
+pass "All modules loaded ok";
+
+# vim: expandtab shiftwidth=4

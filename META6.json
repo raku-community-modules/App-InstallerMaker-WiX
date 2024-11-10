@@ -1,22 +1,26 @@
 {
-    "perl"          : "6.*",
-    "name"          : "App::InstallerMaker::WiX",
-    "version"       : "0.2",
-    "description"   : "Tool to make basic WiX installers for Perl 6 apps, bundling MoarVM/Rakudo.",
-    "author"        : "Jonathan Worthington",
-    "license"       : "Artistic-2.0",
-    "depends"       : [
-        "Shell::Command",
-        "YAMLish"
-    ],
-    "provides"      : {
-        "make-perl6-wix-installer" : "bin/make-perl6-wix-installer",
-        "App::InstallerMaker::WiX::Configuration" :
-            "lib/App/InstallerMaker/WiX/Configuration.rakumod",
-        "App::InstallerMaker::WiX::InstallerBuilder" :
-            "lib/App/InstallerMaker/WiX/InstallerBuilder.rakumod",
-        "App::InstallerMaker::WiX::PreCheck" :
-            "lib/App/InstallerMaker/WiX/PreCheck.rakumod"
-    },
-    "source-url" : "https://github.com/jnthn/p6-app-installermaker-wix.git"
+  "author": "Jonathan Worthington",
+  "build-depends": [
+  ],
+  "depends": [
+    "Shell::Command",
+    "YAMLish"
+  ],
+  "description": "Tool to make basic WiX installers for Raku apps, bundling MoarVM/Rakudo.",
+  "license": "Artistic-2.0",
+  "name": "App::InstallerMaker::WiX::PreCheck",
+  "perl": "6.*",
+  "provides": {
+    "App::InstallerMaker::WiX::Configuration": "lib/App/InstallerMaker/WiX/Configuration.rakumod",
+    "App::InstallerMaker::WiX::InstallerBuilder": "lib/App/InstallerMaker/WiX/InstallerBuilder.rakumod",
+    "App::InstallerMaker::WiX::PreCheck": "lib/App/InstallerMaker/WiX/PreCheck.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://github.com/raku-community-modules/App-InstallerMaker-WiX.git",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.2"
 }

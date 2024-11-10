@@ -1,54 +1,55 @@
-# Raku WiX Installer Maker
+[![Actions Status](https://github.com/raku-community-modules/App-InstallerMaker-WiX/actions/workflows/windows.yml/badge.svg)](https://github.com/raku-community-modules/App-InstallerMaker-WiX/actions)
 
-Written an application in Raku? Want to give Windows users an MSI so they can
-easily install it? That's what this little program is here to help with.
+Raku WiX Installer Maker
+========================
 
-Fair warning: it does something close to the Simplest Thing That Could Possibly
-Work, which may or may not meet your needs, and at the time of publication has
-been applied to make an installer for a single application. (If you have some
-luck with it, feel free to send a PR to change this description!) Please
-consider this tool "free as in puppy" - that is, you can freely take it and use
-it, and if it helps that's great, but you might need to give it some attention
-along the way. If you make changes that you think are useful to others, feel
-free to PR them.
+Written an application in Raku? Want to give Windows users an MSI so they can easily install it? That's what this little program is here to help with.
 
-## How it works
+Fair warning: it does something close to the Simplest Thing That Could Possibly Work, which may or may not meet your needs, and at the time of initial publication (in 2017) has been applied to make an installer for a single application.
+
+  * If you have some luck with it, feel free to send a Pull Request to change this description!
+
+Please consider this tool "free as in puppy" - that is, you can freely take it and use it, and if it helps that's great, but you might need to give it some attention along the way. If you make changes that you think are useful to others, feel free to PR them.
+
+How it works
+------------
 
 This tool:
 
-* Builds a private MoarVM, NQP, and Rakudo Raku of the requested version
-* Installs a zef (module installer) for use with this
-* Uses that to install your application alongside the privately built Rakudo,
-  either from the module ecosystem or from on disk, together with all of its
-  dependencies
-* Generates a WiX XML file
-* Applies `candle` and `light`, resulting in an MSI
+  * Builds a private MoarVM, NQP, and Rakudo Raku of the requested version
 
-## What this tool does not do
+  * Installs a zef (module installer) for use with this
 
-* Go to any effort to hide the original source code from anyone curious enough
-  to spend a few minutes hunting inside the install directory
-* Compile your code into `exe`/`dll` files
-* Handle things that use `Inline::Perl5`, `Inline::Python`, etc. (Modules that
-  use native libraries are fine if they're in the set of modules that, when
-  installed on Windows, will grab the required DLL and install it as a resource
-  for the module to use at runtime. Modules that do this include `GTK::Simple`,
-  `Digest::SHA1::Native`, `SSH::LibSSH`, and `Archive::Libarchive`.)
+  * Uses that to install your application alongside the privately built Rakudo, either from the module ecosystem or from on disk, together with all of its dependencies
 
-## What you'll need
+  * Generates a WiX XML file
 
-* Raku, to run this tool
-* Git
-* Perl, to run the MoarVM/NQP/Rakudo configure programs (tested with
-  ActiveState Perl, though likely shouldn't matter)
-* The Visual C++ build tools, and `nmake`/`cl`/`link` on path. Note that this
-  does not imply installing Visual Studio; it is possible to freely download the
-  [standalone compiler](http://landinghub.visualstudio.com/visual-cpp-build-tools).
-  (It's probably possible, without too much trouble, to patch this tool to use
-  other compilers.)
-* [WiX](http://wixtoolset.org/releases/)
+  * Applies `candle` and `light`, resulting in an MSI
 
-## How to use it
+What this tool does NOT do
+--------------------------
+
+  * Go to any effort to hide the original source code from anyone curious enough to spend a few minutes hunting inside the install directory
+
+  * Compile your code into `exe` / `dll` files
+
+  * Handle things that use `Inline::Perl5`, `Inline::Python`, etc. Modules that use native libraries are fine if they're in the set of modules that, when installed on Windows, will grab the required DLL and install it as a resource for the module to use at runtime. Modules that do this include `GTK::Simple`, `Digest::SHA1::Native`, `SSH::LibSSH`, and `Archive::Libarchive`.)
+
+What you'll need
+----------------
+
+  * Raku, to run this tool
+
+  * Git
+
+  * Perl, to run the MoarVM/NQP/Rakudo configure programs (tested with ActiveState Perl, though likely shouldn't matter)
+
+  * The Visual C++ build tools, and `nmake` / `cl` / `link` on path. Note that this does not imply installing Visual Studio; it is possible to freely download the [standalone compiler](http://landinghub.visualstudio.com/visual-cpp-build-tools). It's probably possible, without too much trouble, to patch this tool to use other compilers.
+
+  * [WiX](http://wixtoolset.org/releases/)
+
+How to use it
+-------------
 
 Write a YAML configuration file like this:
 
@@ -100,6 +101,23 @@ Write a YAML configuration file like this:
 
 Then run this application with that YAML file:
 
-    make-perl6-wix-installer my-glorious-app.yml
+    $ make-raku-wix-installer my-glorious-app.yml
 
 All being well, you'll get an MSI file out.
+
+AUTHOR
+======
+
+Jonathan Worthington
+
+Source can be located at: https://github.com/raku-community-modules/App-InstallerMaker-WiX . Comments and Pull Requests are welcome.
+
+COPYRIGHT AND LICENSE
+=====================
+
+Copyright 2017 - 2020 Jonathan Worthington
+
+Copyright 2024 Raku Community
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+

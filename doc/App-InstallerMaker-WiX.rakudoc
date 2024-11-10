@@ -1,0 +1,141 @@
+=begin pod
+
+=head1 Raku WiX Installer Maker
+
+Written an application in Raku? Want to give Windows users an MSI
+so they can easily install it? That's what this little program is
+here to help with.
+
+Fair warning: it does something close to the Simplest Thing That
+Could Possibly Work, which may or may not meet your needs, and at
+the time of initial publication (in 2017) has been applied to make
+an installer for a single application.
+
+=item If you have some luck with it, feel free to send a Pull Request
+to change this description!
+
+Please consider this tool "free as in puppy" - that is, you can
+freely take it and use it, and if it helps that's great, but you
+might need to give it some attention along the way. If you make
+changes that you think are useful to others, feel free to PR them.
+
+=head2 How it works
+
+This tool:
+
+=item Builds a private MoarVM, NQP, and Rakudo Raku of the
+requested version
+=item Installs a zef (module installer) for use with this
+=item Uses that to install your application alongside the
+privately built Rakudo, either from the module ecosystem or from
+on disk, together with all of its dependencies
+=item Generates a WiX XML file
+=item Applies C<candle> and C<light>, resulting in an MSI
+
+=head2 What this tool does NOT do
+
+=item Go to any effort to hide the original source code from
+anyone curious enough to spend a few minutes hunting inside
+the install directory
+=item Compile your code into C<exe> / C<dll> files
+=item Handle things that use C<Inline::Perl5>, C<Inline::Python>,
+etc. Modules that use native libraries are fine if they're in
+the set of modules that, when installed on Windows, will grab
+the required DLL and install it as a resource for the module
+to use at runtime. Modules that do this include C<GTK::Simple>,
+C<Digest::SHA1::Native>, C<SSH::LibSSH>, and C<Archive::Libarchive>.)
+
+=head2 What you'll need
+
+=item Raku, to run this tool
+=item Git
+=item Perl, to run the MoarVM/NQP/Rakudo configure programs (tested
+with ActiveState Perl, though likely shouldn't matter)
+=item The Visual C++ build tools, and C<nmake> / C<cl> / C<link>
+on path. Note that this does not imply installing Visual Studio;
+it is possible to freely download the
+L<standalone compiler|http://landinghub.visualstudio.com/visual-cpp-build-tools>.
+It's probably possible, without too much trouble, to patch this tool
+to use other compilers.
+=item L<WiX|http://wixtoolset.org/releases/>
+
+=head2 How to use it
+
+Write a YAML configuration file like this:
+
+=begin code
+
+# Versions of MoarVM, NQP, and Rakudo to use. Only 'rakudo' is required,
+# and it will then use the same value for NQP and MoarVM. This will work
+# except in the case where you want to refer to a commit/branch in the
+# Rakudo repository for some reason, since these are actually used to do a
+# checkout in the git repositories.
+versions:
+    - moar: 2024.10
+    - nqp: 2024.10
+    - rakudo: 2024.10
+
+# The installation target location (currently Raku is not relocatable).
+install-location: C:\MyApplication
+
+# The application to install (will be passed to `zef install`), so you can
+# actually list multiple things here if you wish.) You can also pass a path
+# if the project is not in the Raku module ecosystem.
+application: App::MyGloriousApplication
+
+# The name of the MSI file to generate. Optional; default is output.msi.
+msi: my-glorious-application.msi
+
+# By default, the PATH will be ammended to include both bin and site bin
+# directories, meaning that every binary will be exposed (including the
+# bundled MoarVM/Rakudo). This may be useful if you want to make a Raku
+# distribution with modules, for example. On the other hand, if you are
+# making an installer for an application that just happens to be written in
+# Raku, it's not so good. If this `expose-entrypoints` section is included,
+# then a folder will be created and added to path, which only contains
+# launch scripts for the apps mentioned below (it should match the name of
+# the application's entrypoint(s)). Note that you can't include names like
+# "perl6" and "moar" in here, only those of scripts installed by the
+# application definition above.
+expose-entrypoints:
+    - myapp
+
+# Some WiX configuration. You must generate unique GUIDs for your app. Get
+# them [here](https://www.guidgenerator.com/) while supplies last! Check
+# the dashes, uppercase, and braces boxes.
+wix:
+    guid: '{YOUR-GUID-HERE}'
+    name: Your Glorious Application
+    manufacturer: Your Wonderful Company
+    version: 6.6.6
+    language: 1033
+    component-guid: '{A-DIFFERENT-GUID-HERE}'
+
+=end code
+
+Then run this application with that YAML file:
+
+=begin code
+
+$ make-raku-wix-installer my-glorious-app.yml
+
+=end code
+
+All being well, you'll get an MSI file out.
+
+=head1 AUTHOR
+
+Jonathan Worthington
+
+Source can be located at: https://github.com/raku-community-modules/App-InstallerMaker-WiX .
+Comments and Pull Requests are welcome.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2017 - 2020 Jonathan Worthington
+
+Copyright 2024 Raku Community
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
+=end pod
